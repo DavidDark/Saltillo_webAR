@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="shortcut icon" href="#" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        
+        <title>Test</title>
+        
+        <!-- Includes necesarios para la realidad aumentada -->
+        <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+        <!--<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>-->
+        <!--Script principal para las funcionalidades del video -->
+        <script src="js/vid_script.js"></script>
+    </head>
+
+    <style>
+  .arjs-loader {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .arjs-loader div {
+    text-align: center;
+    font-size: 1.25em;
+    color: white;
+  }
+</style>
+
+    <body style="margin : 0px; overflow: hidden;">
+        <div class="arjs-loader">
+            <div>Cargando...</div>
+        </div>
+
+        <a-scene vr-mode-ui="enabled: false;"
+                 renderer="logarithmicDepthBuffer: true;"
+                 embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+            
+            <a-assets>
+                <video crossorigin="anonymous" id="vid" loop="true" type="video/mp4" preload="auto" src="assets/vid_Lion.mp4" webkit-playsinline playsinline></video>
+            </a-assets>
+            
+            <a-nft vidhandler type="nft" url="Saltillo_CityLAB/assets/track/Lion_track"
+                smooth="true" smoothcount="10" smoothtolerance="0.01" smooththreshold="5">
+
+                <a-video src="#vid" height='580' width='740' position="270 0 -100" rotation="270 0 0"></a-video>
+            </a-nft>
+            
+            <a-entity camera></a-entity>
+        </a-scene>
+    </body>
+</html>
+<!--Datos a tomar en cuenta: Los marcadores NFT permiten la función para cuando el marcador es encontrado en la toma y cuando se pierde.-->
+<!--Los marcadores "Marker" no permiten este tipo de funciones. (o al menos no que yo sepa).-->
